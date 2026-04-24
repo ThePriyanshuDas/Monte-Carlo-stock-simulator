@@ -27,7 +27,6 @@
 
 ## 📌 Project Overview
 
-hello
 Financial markets are inherently stochastic. Instead of predicting a single future price, this project generates **thousands of possible price trajectories** using probabilistic modeling.
 
 The simulation helps answer:
