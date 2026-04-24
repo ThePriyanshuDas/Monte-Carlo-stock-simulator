@@ -50,14 +50,16 @@ Where:
 
 ---
 
-## 📁 Project Structure
-
-```
 monte-carlo-stock-simulator/
 │
 ├── data/
+│   └── sample_data.csv
+│
 ├── notebooks/
+│   └── exploration.ipynb
+│
 ├── src/
+│   ├── __init__.py
 │   ├── data_loader.py
 │   ├── preprocessing.py
 │   ├── simulation.py
@@ -65,11 +67,15 @@ monte-carlo-stock-simulator/
 │   └── visualization.py
 │
 ├── tests/
+│   └── test_simulation.py
+│
 ├── config/
+│   └── config.yaml
+│
 ├── main.py
 ├── requirements.txt
-└── README.md
-```
+├── README.md
+└── .gitignore
 
 ---
 
