@@ -50,6 +50,9 @@ Where:
 
 ---
 
+## 📁 Project Structure
+
+```bash
 monte-carlo-stock-simulator/
 │
 ├── data/
@@ -77,6 +80,22 @@ monte-carlo-stock-simulator/
 ├── README.md
 └── .gitignore
 
+```
+
+## 📁 Project Structure (with Description)
+
+- **data/** → Sample or historical stock data  
+- **notebooks/** → Exploratory analysis and experiments  
+- **src/** → Core implementation  
+  - `data_loader.py` → Data fetching  
+  - `preprocessing.py` → Return calculations  
+  - `simulation.py` → Monte Carlo engine  
+  - `metrics.py` → Risk calculations  
+  - `visualization.py` → Plotting  
+- **tests/** → Unit tests  
+- **config/** → Configuration files  
+- **main.py** → Entry point  
+
 ---
 
 ## 🧪 Installation
@@ -86,7 +105,7 @@ Clone the repository:
 ```bash
 git clone https://github.com/your-username/monte-carlo-stock-simulator.git
 cd monte-carlo-stock-simulator
-```
+
 
 Install dependencies:
 
