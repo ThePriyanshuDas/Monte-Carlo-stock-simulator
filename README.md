@@ -1,15 +1,27 @@
-# Monte Carlo Stock Price Simulator
+<h1 align="center">📈 Monte Carlo Stock Price Simulator</h1>
 
-![Python](https://img.shields.io/badge/python-3.9%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Domain](https://img.shields.io/badge/domain-Quant%20Finance-purple)
+<p align="center">
+  A quantitative finance project that simulates stock price paths using 
+  <b>Monte Carlo methods</b> and <b>Geometric Brownian Motion (GBM)</b>
+ This project estimates the distribution of possible future prices and evaluates financial risk metrics such as Value at Risk (VaR).
+</p>
 
-![Stars](https://img.shields.io/github/stars/ThePriyanshuDas/monte-carlo-stock-simulator)
-![Forks](https://img.shields.io/github/forks/ThePriyanshuDas/monte-carlo-stock-simulator)
-![Issues](https://img.shields.io/github/issues/ThePriyanshuDas/monte-carlo-stock-simulator)
-![Last Commit](https://img.shields.io/github/last-commit/ThePriyanshuDas/monte-carlo-stock-simulator)
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.9%2B-blue" />
+  <img src="https://img.shields.io/badge/license-MIT-green" />
+  <img src="https://img.shields.io/badge/domain-Quant%20Finance-purple" />
+  <img src="https://img.shields.io/badge/status-Active-brightgreen" />
+</p>
 
-A quantitative finance project that simulates future stock price paths using **Monte Carlo methods** and **Geometric Brownian Motion (GBM)**. This project estimates the distribution of possible future prices and evaluates financial risk metrics such as Value at Risk (VaR).
+<p align="center">
+  <img src="https://img.shields.io/github/stars/ThePriyanshuDas/monte-carlo-stock-simulator?style=social" />
+  <img src="https://img.shields.io/github/forks/ThePriyanshuDas/monte-carlo-stock-simulator?style=social" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/issues/ThePriyanshuDas/monte-carlo-stock-simulator" />
+  <img src="https://img.shields.io/github/last-commit/ThePriyanshuDas/monte-carlo-stock-simulator" />
+</p>
 
 ---
 
