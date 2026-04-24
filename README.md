@@ -1,5 +1,14 @@
 # Monte Carlo Stock Price Simulator
 
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Domain](https://img.shields.io/badge/domain-Quant%20Finance-purple)
+
+![Stars](https://img.shields.io/github/stars/ThePriyanshuDas/monte-carlo-stock-simulator)
+![Forks](https://img.shields.io/github/forks/ThePriyanshuDas/monte-carlo-stock-simulator)
+![Issues](https://img.shields.io/github/issues/ThePriyanshuDas/monte-carlo-stock-simulator)
+![Last Commit](https://img.shields.io/github/last-commit/ThePriyanshuDas/monte-carlo-stock-simulator)
+
 A quantitative finance project that simulates future stock price paths using **Monte Carlo methods** and **Geometric Brownian Motion (GBM)**. This project estimates the distribution of possible future prices and evaluates financial risk metrics such as Value at Risk (VaR).
 
 ---
