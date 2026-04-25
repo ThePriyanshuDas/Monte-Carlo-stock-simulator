@@ -77,26 +77,32 @@ Where:
 monte-carlo-stock-simulator/
 │
 ├── data/
-│   └── sample_data.csv
+│   └── sample_data.csv              # optional fallback dataset
 │
 ├── notebooks/
-│   └── exploration.ipynb
+│   └── exploration.ipynb           # EDA and experimentation
 │
 ├── src/
 │   ├── __init__.py
-│   ├── data_loader.py
-│   ├── preprocessing.py
-│   ├── simulation.py
-│   ├── metrics.py
-│   └── visualization.py
+│   ├── data_loader.py              # fetch data (Yahoo Finance / CSV)
+│   ├── preprocessing.py            # compute returns, estimate μ and σ
+│   ├── simulation.py               # simulation orchestrator
+│   ├── metrics.py                  # risk metrics (VaR, expected price)
+│   └── visualization.py            # plotting functions
+│
+├── models/
+│   ├── __init__.py
+│   └── gbm.py                      # Geometric Brownian Motion model
 │
 ├── tests/
-│   └── test_simulation.py
+│   └── test_simulation.py          # unit tests
 │
 ├── config/
-│   └── config.yaml
+│   └── config.yaml                # configuration parameters
 │
-├── main.py
+├── app.py                         # Streamlit web app (UI)
+├── main.py                        # script entry point
+│
 ├── requirements.txt
 ├── README.md
 └── .gitignore
