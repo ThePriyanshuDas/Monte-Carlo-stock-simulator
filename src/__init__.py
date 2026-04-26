@@ -1,5 +1,3 @@
-# src/__init__.py
-
 from .data_loader import load_csv, load_from_yahoo
 from .preprocessing import compute_log_returns, estimate_parameters
 from .simulation import simulate_gbm
