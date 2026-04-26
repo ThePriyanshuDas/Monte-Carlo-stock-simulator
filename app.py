@@ -1,23 +1,44 @@
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
+import yfinance as yf
 
+from src.visualization_plotly import (
+    plot_paths_interactive,
+    plot_distribution_with_var
+)
+
+st.set_page_config(layout="wide")
+
+# =========================
 # Title
-st.title("📈 Monte Carlo Stock Price Simulator")
+# =========================
+st.title("📈 Monte Carlo Stock Simulator Dashboard")
 
-st.markdown("Simulate future stock prices using Geometric Brownian Motion")
+# =========================
+# Sidebar Inputs
+# =========================
+st.sidebar.header("⚙️ Simulation Settings")
 
-# Sidebar inputs
-st.sidebar.header("Simulation Parameters")
+ticker = st.sidebar.text_input("Stock Ticker", "AAPL")
+start_date = st.sidebar.date_input("Start Date", value=None)
 
-S0 = st.sidebar.number_input("Initial Price", value=100.0)
-mu = st.sidebar.number_input("Expected Return (μ)", value=0.1)
-sigma = st.sidebar.number_input("Volatility (σ)", value=0.2)
 T = st.sidebar.slider("Time Horizon (Years)", 1, 5, 1)
 steps = st.sidebar.selectbox("Steps per Year", [252, 365])
-simulations = st.sidebar.slider("Number of Simulations", 100, 5000, 1000)
+simulations = st.sidebar.slider("Simulations", 100, 5000, 1000)
 
-# Simulation function
+run_button = st.sidebar.button("Run Simulation")
+
+# =========================
+# Data Loading
+# =========================
+@st.cache_data
+def load_data(ticker):
+    data = yf.download(ticker, start="2020-01-01")
+    return data["Close"]
+
+# =========================
+# Simulation Function
+# =========================
 def simulate_gbm(S0, mu, sigma, T, steps, simulations):
     dt = 1 / steps
     N = int(T * steps)
@@ -33,24 +54,54 @@ def simulate_gbm(S0, mu, sigma, T, steps, simulations):
 
     return paths
 
-# Run simulation
-if st.button("Run Simulation"):
+# =========================
+# Run Simulation
+# =========================
+if run_button:
+    prices = load_data(ticker)
+
+    log_returns = np.log(prices / prices.shift(1)).dropna()
+    mu = float(log_returns.mean() * 252)
+    sigma = float(log_returns.std() * np.sqrt(252))
+
+    S0 = float(prices.iloc[-1])
+
     paths = simulate_gbm(S0, mu, sigma, T, steps, simulations)
     final_prices = paths[-1]
 
-    # Metrics
-    st.subheader("📊 Results")
-    st.write(f"Expected Price: {np.mean(final_prices):.2f}")
-    st.write(f"Value at Risk (5%): {np.percentile(final_prices, 5):.2f}")
+    # =========================
+    # Metrics Row
+    # =========================
+    col1, col2, col3 = st.columns(3)
 
-    # Plot paths
-    st.subheader("📈 Simulated Paths")
-    fig1, ax1 = plt.subplots()
-    ax1.plot(paths)
-    st.pyplot(fig1)
+    col1.metric("📊 Expected Price", f"{np.mean(final_prices):.2f}")
+    col2.metric("⚠️ VaR (5%)", f"{np.percentile(final_prices, 5):.2f}")
+    col3.metric("📉 Volatility (σ)", f"{sigma:.2f}")
 
-    # Distribution
-    st.subheader("📉 Final Price Distribution")
-    fig2, ax2 = plt.subplots()
-    ax2.hist(final_prices, bins=50)
-    st.pyplot(fig2)
+    st.divider()
+
+    # =========================
+    # Charts Row 1
+    # =========================
+    col_left, col_right = st.columns(2)
+
+    with col_left:
+        st.subheader("📈 Simulated Price Paths")
+        fig_paths = plot_paths_interactive(paths[:, :100])  # limit for performance
+        st.plotly_chart(fig_paths, use_container_width=True)
+
+    with col_right:
+        st.subheader("📊 Price Distribution + VaR")
+        fig_dist, var = plot_distribution_with_var(final_prices)
+        st.plotly_chart(fig_dist, use_container_width=True)
+
+    st.divider()
+
+    # =========================
+    # Additional Insights
+    # =========================
+    st.subheader("📌 Insights")
+
+    st.write(f"- Estimated drift (μ): {mu:.4f}")
+    st.write(f"- Estimated volatility (σ): {sigma:.4f}")
+    st.write(f"- Simulations: {simulations}")
