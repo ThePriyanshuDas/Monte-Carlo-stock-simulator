@@ -95,7 +95,9 @@ monte-carlo-stock-simulator/
 │   └── gbm.py                      # Geometric Brownian Motion model
 │
 ├── tests/
-│   └── test_simulation.py          # unit tests
+│    ├── test_simulation.py
+│    ├── test_preprocessing.py
+│    └── test_metrics.py         # unit tests
 │
 ├── config/
 │   └── config.yaml                # configuration parameters
@@ -171,6 +173,25 @@ Value at Risk (5%): 85.10
 
 This project can optionally use real historical stock data via
 Yahoo Finance using the `yfinance` Python library.
+
+---
+
+## 🧪 Testing
+
+Run tests with coverage:
+
+```bash
+pytest --cov=src --cov=models --cov-report=term-missing
+```
+
+---
+
+# 🎯 What This Achieves
+
+- ✅ Full pipeline testing  
+- ✅ Mathematical validation  
+- ✅ Coverage reporting  
+- ✅ Industry-level structure  
 
 ---
 
