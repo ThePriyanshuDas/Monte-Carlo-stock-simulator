@@ -33,9 +33,13 @@ run_button = st.sidebar.button("Run Simulation")
 # =========================
 @st.cache_data
 def load_data(ticker):
-    data = yf.download(ticker, start="2020-01-01")
-    return data["Close"]
+    data = yf.download(ticker, start=start_date or "2020-01-01")
 
+    # Handle multi-index columns (yfinance issue)
+    if isinstance(data.columns, tuple) or hasattr(data.columns, "levels"):
+        data.columns = data.columns.get_level_values(0)
+
+    return data["Close"]
 # =========================
 # Simulation Function
 # =========================
@@ -61,8 +65,8 @@ if run_button:
     prices = load_data(ticker)
 
     log_returns = np.log(prices / prices.shift(1)).dropna()
-    mu = float(log_returns.mean() * 252)
-    sigma = float(log_returns.std() * np.sqrt(252))
+    mu = float(np.mean(log_returns)) * 252
+    sigma = float(np.std(log_returns)) * np.sqrt(252)
 
     S0 = float(prices.iloc[-1])
 
