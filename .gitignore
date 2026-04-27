@@ -15,7 +15,9 @@ env/
 .ipynb_checkpoints/
 
 # Data files (optional – if large)
-data/*.csv
+data/*
+!data/sample_data.csv
+!data/ohlc_data.csv
 
 # OS files
 .DS_Store
